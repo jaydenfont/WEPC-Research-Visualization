@@ -37,6 +37,13 @@ def reformat_to_pct_change(data):
         
     # drop first col of all Nan
     pivot_data = pivot_data.drop(columns=pivot_data.columns[0])
+
+    # reformat dates
+    new_cols = []
+    for column in pivot_data.columns:
+        new_col = (column[0], column[1].strftime("%b-%d-%y"))
+        new_cols.append(new_col)
+    pivot_data.columns = tuple(new_cols)
     
     return pivot_data
 
